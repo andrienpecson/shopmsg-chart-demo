@@ -3,7 +3,7 @@ import * as React from "react";
 import { Layout, Menu, Breadcrumb, Icon, Card, Switch, Row, Col } from "antd";
 import axios from "axios";
 import { chain, without, findIndex } from "underscore";
-
+// Stateless Components
 import DateRangePicker from "./globalComponents/dateRangePicker";
 import LineChart from "./globalComponents/lineChart";
 import Loading from "./globalComponents/loading";
@@ -13,6 +13,7 @@ import { openNotification } from "../global-function";
 const { Header, Content, Footer, Sider } = Layout;
 const SubMenu = Menu.SubMenu;
 
+// Interfaces
 interface Props { }
 
 interface ChartData {
@@ -38,6 +39,7 @@ interface State {
 };
 
 require("antd/dist/antd.less");
+
 export default class DashboardApp extends React.Component<Props, State> {
   state: State = {
     collapsed: false,
@@ -66,7 +68,8 @@ export default class DashboardApp extends React.Component<Props, State> {
 
   fetchData = async (params) => {
     const selectedDates = (params).map((date) => { return date.format("YYYY-MM-DD") });
-    // Fetching of data and transfroming into chart js dataset array.
+    // Fetching of data based on the selected date range.
+    // For the request URL I append https://cors-anywhere.herokuapp.com/ just to override the CORS header issue with Heroku server. 
     const optins = new Promise(async (resolve, reject) => {
       const optinsReqURL = `${"https://cors-anywhere.herokuapp.com/"}https://shopmsg-chart-demo.herokuapp.com/api/reports/optins.json?from=${selectedDates[0]}&to=${selectedDates[1]}`;
       axios
@@ -109,7 +112,7 @@ export default class DashboardApp extends React.Component<Props, State> {
           reject(err)
         })
     });
-
+    // Preparation of data for the line chart.
     try {
       const fetchResult = await Promise.all([optins, recipients]);
       const chartLabels = chain(fetchResult)
@@ -156,10 +159,8 @@ export default class DashboardApp extends React.Component<Props, State> {
   }
 
   render() {
-    const {
-      loading,
-      collapsed
-    } = { ...this.state };
+    const { loading, collapsed } = { ...this.state };
+
     return (
       <Layout style={{ minHeight: "100vh" }}>
         <Sider
