@@ -1,7 +1,21 @@
 import React from "react";
 import { Line } from "react-chartjs-2";
 
-{/* Custom Legend */ }
+interface ChartData {
+  label: string,
+  fill: boolean,
+  borderColor: string,
+  backgroundColor: string,
+  lineTension: number,
+  data: Array<number>
+}
+
+interface Props {
+  data: Array<ChartData>,
+  labels: Array<string>
+}
+
+// Custom Legend
 const generateLegend = ({ backgroundColor, label }) => {
   return (
     <div style={{ display: "flex", alignItems: "center", marginLeft: 10 }}>
@@ -11,7 +25,7 @@ const generateLegend = ({ backgroundColor, label }) => {
   )
 }
 
-const lineChart = ({ data, labels }) => {
+const lineChart = ({ data, labels }: Props) => {
   const dataObj = {
     labels: labels,
     datasets: data
