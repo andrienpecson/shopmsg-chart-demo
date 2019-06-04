@@ -11,48 +11,45 @@ const generateLegend = ({ backgroundColor, label }) => {
   )
 }
 
-const lineChart = ({ data, labels, options = {} }) => {
+const lineChart = ({ data, labels }) => {
   const dataObj = {
     labels: labels,
     datasets: data
   };
   const optionsObj = {
-    ...{
-      maintainAspectRatio: false,
-      scales: {
-        xAxes: [{
-          gridLines: {
-            color: "rgba(0, 0, 0, 0)",
-          },
-          ticks: {
-            fontColor: "rgba(0, 0, 0, 0.45)"
-          }
-        }],
-        yAxes: [{
-          display: false
-        }]
-      },
-      elements: {
-        point: {
-          radius: 0
+    maintainAspectRatio: false,
+    scales: {
+      xAxes: [{
+        gridLines: {
+          color: "rgba(0, 0, 0, 0)",
+        },
+        ticks: {
+          fontColor: "rgba(0, 0, 0, 0.45)"
         }
-      },
-      legend: {
+      }],
+      yAxes: [{
         display: false
-      },
-      ticks: {
-        fontFamily: "sans-serif"
-      },
-      tooltips: {
-        mode: "index",
-        intersect: false
-      },
-      hover: {
-        mode: "index",
-        intersect: false
+      }]
+    },
+    elements: {
+      point: {
+        radius: 0
       }
     },
-    options
+    legend: {
+      display: false
+    },
+    ticks: {
+      fontFamily: "sans-serif"
+    },
+    tooltips: {
+      mode: "index",
+      intersect: false
+    },
+    hover: {
+      mode: "index",
+      intersect: false
+    }
   };
   return (
     <div>

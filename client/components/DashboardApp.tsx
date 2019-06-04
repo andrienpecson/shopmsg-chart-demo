@@ -70,7 +70,7 @@ export default class DashboardApp extends React.Component<Props, State> {
     const selectedDates = (params).map((date) => { return date.format("YYYY-MM-DD") });
     // Fetching of data based on the selected date range.
     // For the request URL I append https://cors-anywhere.herokuapp.com/ just to override the CORS header issue with Heroku server. 
-    const optins = new Promise(async (resolve, reject) => {
+    const optins = new Promise((resolve, reject) => {
       const optinsReqURL = `${"https://cors-anywhere.herokuapp.com/"}https://shopmsg-chart-demo.herokuapp.com/api/reports/optins.json?from=${selectedDates[0]}&to=${selectedDates[1]}`;
       axios
         .get(optinsReqURL).then(({ data }) => {
@@ -92,7 +92,7 @@ export default class DashboardApp extends React.Component<Props, State> {
           reject(err)
         })
     });
-    const recipients = new Promise(async (resolve, reject) => {
+    const recipients = new Promise((resolve, reject) => {
       const recipientsReqURL = `${"https://cors-anywhere.herokuapp.com/"}https://shopmsg-chart-demo.herokuapp.com/api/reports/recipients.json?from=${selectedDates[0]}&to=${selectedDates[1]}`;
       axios
         .get(recipientsReqURL).then(({ data }) => {
